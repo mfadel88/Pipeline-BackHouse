@@ -26,25 +26,25 @@ pipeline {
     
 
     
-        stage('Deploy') {
-        steps {
-                script {               
-                if (env.BRANCH_NAME == 'prod' || env.BRANCH_NAME == 'dev' || env.BRANCH_NAME == 'test') {
-                withCredentials([file(credentialsId: 'JenkinsConfig-minikube', variable: 'cfg')]){
-                            sh """
-                            export NUM=\$(cat ../build)
-                            mv Deployment/deploy.yaml Deployment/deploy
-                            cat Deployment/deploy | envsubst > Deployment/deploy.yaml
-                            rm -f Deployment/deploy
-                            kubectl apply --kubeconfig=${cfg} -f Deployment/service.yaml
-                            kubectl apply --kubeconfig=${cfg} -f Deployment/deploy.yaml
-                            """
-                            }
-                        } 
+//         stage('Deploy') {
+//         steps {
+//                 script {               
+//                 if (env.BRANCH_NAME == 'prod' || env.BRANCH_NAME == 'dev' || env.BRANCH_NAME == 'test') {
+//                 withCredentials([file(credentialsId: 'JenkinsConfig-minikube', variable: 'cfg')]){
+//                             sh """
+//                             export NUM=\$(cat ../build)
+//                             mv Deployment/deploy.yaml Deployment/deploy
+//                             cat Deployment/deploy | envsubst > Deployment/deploy.yaml
+//                             rm -f Deployment/deploy
+//                             kubectl apply --kubeconfig=${cfg} -f Deployment/service.yaml
+//                             kubectl apply --kubeconfig=${cfg} -f Deployment/deploy.yaml
+//                             """
+//                             }
+//                         } 
 
-                    }
-                }
+//                     }
+//                 }
         
-    }
- }
-}
+//     }
+//  }
+// }
