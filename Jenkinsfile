@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1' }
+    // agent { label 'slave1' }
     // parameters{
     //     choice(name: 'ENV', choices: {'dev', 'test', 'prod','main'})
     // }
@@ -7,16 +7,16 @@ pipeline {
         stage('Build') {
      steps {
                 script {
-                     withCredentials([usernamePassword(credentialsId: 'dockerHub-cred', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    if (env.BRANCH_NAME == 'main') {
+                     withCredentials([usernamePassword(credentialsId: 'Gocker-Hub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                    // if (env.BRANCH_NAME == 'main') {
                         sh """
                         docker login -u $user -p $pass
                         docker build -t mfadel8/app:$BUILD_NUMBER .
                         docker push mfadel8/app:$BUILD_NUMBER
-                        echo ${BUILD_NUMBER} > ../build
+                        echo ${BUILD_NUMBER} > ../build123456
                         """
                     
-                       }
+                    //    }
                      }
                 }
                  
@@ -46,5 +46,5 @@ pipeline {
 //                 }
         
 //     }
-//  }
-// }
+ }
+}
