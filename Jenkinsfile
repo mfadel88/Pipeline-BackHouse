@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
      steps {
                 script {
-                     withCredentials([usernamePassword(credentialsId: 'Gocker-Hub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                     withCredentials([usernamePassword(credentialsId: 'DockerHub-credential', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     // if (env.BRANCH_NAME == 'main') {
                         sh """
                         docker login -u $user -p $pass
